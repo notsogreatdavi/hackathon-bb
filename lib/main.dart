@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon/Screens/homeScreen.dart';
+import 'package:hackathon/Screens/welcomeScreen.dart';
 import 'package:hackathon/widgets/bottomNavigator.dart';
 import 'Screens/scanScreen.dart';
 import 'Screens/loginScreen.dart';
@@ -38,15 +38,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/tela_login',
+      initialRoute: '/welcomeScreen',
       routes: {
+        '/welcomeScreen': (context) => WelcomeScreen(),
         '/tela_login': (context) => LoginScreen(),
         '/tela_cadastro': (context) => CadastroScreen(),
         '/tela_scan': (context) => ScanScreen(),
         '/tela_historico': (context) => HistoricoScreen(),
         '/tela_confirmacao': (context) => ConfirmacaoScreen(),
         '/home': (context) => Scaffold(
-                    body: Home(),
+                    body: ScanScreen(),
                     bottomNavigationBar: 
                       CustomBottomNavBar(
                         selectedIndex: 0,
