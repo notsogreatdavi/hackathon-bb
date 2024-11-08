@@ -13,7 +13,8 @@ Future<void> main() async {
 
   await Supabase.initialize(
     url: 'https://xezlpikxcwacpbzyrtse.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlemxwaWt4Y3dhY3BienlydHNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMDk0MTAsImV4cCI6MjA0NjU4NTQxMH0.xyA_AmkMEWX5Lau3pEcpyX8MIO-jIPtsXLnLpQ4Wqj4',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlemxwaWt4Y3dhY3BienlydHNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMDk0MTAsImV4cCI6MjA0NjU4NTQxMH0.xyA_AmkMEWX5Lau3pEcpyX8MIO-jIPtsXLnLpQ4Wqj4',
   );
   runApp(MyApp());
 }
@@ -54,16 +55,10 @@ class MyApp extends StatelessWidget {
         '/tela_historico': (context) => HistoricoScreen(),
         '/tela_confirmacao': (context) => ConfirmacaoScreen(),
         '/home': (context) => Scaffold(
-                    body: ScanScreen(),
-                    bottomNavigationBar: 
-                      CustomBottomNavBar(
-                        selectedIndex: 0,
-                        onTabChange: (index) {},
-                    ),
-                  ),
+              body: ScanScreen(),
+              bottomNavigationBar: HomeScreen(),
+            ),
       },
     );
   }
 }
-
-
