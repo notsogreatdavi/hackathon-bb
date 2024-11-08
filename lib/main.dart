@@ -56,11 +56,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Scaffold(
                     body: ScanScreen(),
                     bottomNavigationBar: 
-                      CustomBottomNavBar(
-                        selectedIndex: 0,
-                        onTabChange: (index) {},
-                    ),
-                  ),
+                      HomeScreen(),)
+
       },
     );
   }
