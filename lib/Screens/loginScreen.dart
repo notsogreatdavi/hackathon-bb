@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,16 +13,39 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  Future<void> loginUsuario() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final email = emailController.text;
+      final password = passwordController.text;
+
+      // Tentativa de login com Supabase
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (response.session != null) {
+        // Login bem-sucedido: navega para a tela principal
+        Navigator.pushNamed(context, '/home');
+      } else {
+        // Exibe mensagem de erro caso ocorra uma falha no login
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao fazer login')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF105D44), // Dark green background
+      backgroundColor: const Color(0xFF105D44), // Fundo verde escuro
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // App Logo or Title
+              // Título do App ou Logo
               Column(
                 children: [
                   const Text(
@@ -40,21 +64,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Replace with your logo or illustration
+                  // Imagem (coloque sua logo ou ilustração)
                   Image.asset(
-                    'lib/assets/recycle_image.png', // Make sure to add this image to your assets folder
+                    'lib/assets/recycle_image.png', // Adicione a imagem na pasta assets
                     height: 150,
                   ),
                 ],
               ),
               const SizedBox(height: 40),
 
-              // Login Form
+              // Formulário de Login
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    // Email Field
+                    // Campo de Email
                     TextFormField(
                       controller: emailController,
                       decoration: InputDecoration(
@@ -69,18 +93,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
+                          return 'Por favor, insira seu email';
                         }
                         if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$')
                             .hasMatch(value)) {
-                          return 'Enter a valid email';
+                          return 'Insira um email válido';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 20),
 
-                    // Password Field
+                    // Campo de Senha
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -95,14 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Por favor, insira sua senha';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 30),
 
-                    // Login Button
+                    // Botão de Login
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
@@ -111,11 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         backgroundColor: Colors.grey[200],
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Handle login logic here
-                        }
-                      },
+                      onPressed: loginUsuario,
                       child: const Text(
                         'Login',
                         style: TextStyle(color: Color(0xFF105D44)),
@@ -126,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
 
-              // Registration Link
+              // Link para Cadastro
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -137,7 +157,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/tela_cadastro');
-                      
                     },
                     child: const Text(
                       'Cadastre-se',
