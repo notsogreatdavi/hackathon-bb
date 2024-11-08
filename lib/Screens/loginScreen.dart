@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 children: [
                   const Text(
-                    "Nome do APP",
+                    "Recollet",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

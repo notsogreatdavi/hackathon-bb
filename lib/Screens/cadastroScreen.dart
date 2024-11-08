@@ -55,7 +55,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
               const Column(
                 children: [
                   Text(
-                    "Nome do APP",
+                    "Recollet",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   Text("By Banco do Brasil", style: TextStyle(fontSize: 14, color: Colors.white70)),

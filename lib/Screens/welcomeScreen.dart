@@ -20,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const Column(
               children: [
                 Text(
-                  "Nome do APP",
+                  "Recollet",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

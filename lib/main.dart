@@ -42,10 +42,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Scaffold(
           body: ScanScreen(),
           bottomNavigationBar: HomeScreen(),
-        ),
-              body: ScanScreen(),
-              bottomNavigationBar: HomeScreen(),
-            ),
+        )
       },
     );
   }
