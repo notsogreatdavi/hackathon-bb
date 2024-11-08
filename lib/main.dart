@@ -13,7 +13,8 @@ Future<void> main() async {
 
   await Supabase.initialize(
     url: 'https://xezlpikxcwacpbzyrtse.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlemxwaWt4Y3dhY3BienlydHNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMDk0MTAsImV4cCI6MjA0NjU4NTQxMH0.xyA_AmkMEWX5Lau3pEcpyX8MIO-jIPtsXLnLpQ4Wqj4',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlemxwaWt4Y3dhY3BienlydHNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMDk0MTAsImV4cCI6MjA0NjU4NTQxMH0.xyA_AmkMEWX5Lau3pEcpyX8MIO-jIPtsXLnLpQ4Wqj4',
   );
   runApp(MyApp());
 }
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
           body: ScanScreen(),
           bottomNavigationBar: HomeScreen(),
         ),
+              body: ScanScreen(),
+              bottomNavigationBar: HomeScreen(),
+            ),
       },
     );
   }
