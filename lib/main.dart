@@ -46,16 +46,10 @@ class MyApp extends StatelessWidget {
         '/tela_historico': (context) => HistoricoScreen(),
         '/tela_confirmacao': (context) => ConfirmacaoScreen(),
         '/home': (context) => Scaffold(
-                    body: Home(),
-                    bottomNavigationBar: 
-                      CustomBottomNavBar(
-                        selectedIndex: 0,
-                        onTabChange: (index) {},
-                    ),
-                  ),
+              body: ScanScreen(),
+              bottomNavigationBar: HomeScreen(),
+            ),
       },
     );
   }
 }
-
-
