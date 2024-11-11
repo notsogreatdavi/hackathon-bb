@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HistoricoScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
   @override
   void initState() {
     super.initState();
-    carregarHistorico();
     obterUsuarioAtual(); // Obter o ID do usuário autenticado
   }
 
@@ -28,15 +28,20 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
     setState(() {
       userId = user?.id; // Armazena o ID do usuário
     });
+    if (userId != null) {
+      await carregarHistorico(userId!); // Carregar histórico apenas do usuário atual
+    }
   }
 
-  Future<void> carregarHistorico() async {
+  Future<void> carregarHistorico(String userId) async {
     final response = await Supabase.instance.client
         .from('registros')
-        .select();
+        .select()
+        .eq('id-usuario', userId); // Filtra registros pelo ID do usuário
 
     if (response.error == null) {
       final data = (response as List).cast<Map<String, dynamic>>();
+
       setState(() {
         pendentes = data.where((item) => item['status'] == false).toList();
         entregues = data.where((item) => item['status'] == true).toList();
@@ -65,11 +70,19 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
       ),
       child: ListTile(
         leading: item['img-url'] != null
-            ? Image.network(
-                item['img-url'],
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
+            ? Container(
+                width: 60, // Largura máxima para a imagem
+                height: 60, // Altura máxima para a imagem
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: CachedNetworkImage(
+                  imageUrl: item['img-url'],
+                  fit: BoxFit.contain,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.broken_image, size: 50),
+                ),
               )
             : Icon(Icons.device_unknown, size: 50),
         title: Text(
@@ -89,7 +102,11 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF105D44),
       appBar: AppBar(
-        title: const Text('Histórico de Reciclagem'),
+        title: const Text('Recollet'),
+        titleTextStyle: TextStyle(
+          fontSize: 19,
+          color: Colors.white
+        ),
         backgroundColor: const Color(0xFF105D44),
         elevation: 0,
       ),
@@ -169,7 +186,7 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'Recicle',
+                    'Recicle!',
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Text(
