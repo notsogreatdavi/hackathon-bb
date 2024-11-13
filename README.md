@@ -52,7 +52,6 @@ O projeto é dividido em três principais componentes:
 - **Flutter**: Framework para desenvolvimento da aplicação mobile.
 - **Supabase**: Banco de dados e autenticação.
 - **Python** e **OpenCV**: Utilizados para a visão computacional e identificação de objetos recicláveis.
-- **Docker**: Para containerização e fácil implantação dos módulos de visão computacional.
 
 ---
 
