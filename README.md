@@ -16,7 +16,6 @@ Bem-vindo ao repositório do **Projeto de Reciclagem Inteligente**! Este projeto
   - [Jornada do Usuário](#jornada-do-usuário)
   - [Value Proposition Canvas](#value-proposition-canvas)
 - [Contribuições](#contribuições)
-- [Licença](#licença)
 
 ---
 
